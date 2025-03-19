@@ -15,7 +15,7 @@ BasicSwap occupies a distinctive position in the DEX ecosystem, particularly in 
 
 
 <div style={{textAlign: 'center', marginBottom: '2rem', marginTop: '2rem'}}>
-  <img src="/img/images/basicswap_compared.jpg" alt="DEX Comparison" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
+  <img src="@site/static/img/images/basicswap_compared.jpg" alt="DEX Comparison" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
   <p style={{fontStyle: 'italic', marginTop: '0.5rem'}}>
   </p>
 </div>

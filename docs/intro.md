@@ -24,7 +24,7 @@ BasicSwap stands as the world's most secure and decentralized DEX, facilitating 
 This fully non-custodial platform features a decentralized order book where users can make or take swap offers without fees, counterparties, or account requirements. 
 
 <div style={{textAlign: 'center', marginBottom: '1.5rem'}}>
-  <img src="/img/images/basicswap_orders.png" alt="BasicSwap's order book" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
+  <img src="@site/static/img/images/basicswap_orders.png" alt="BasicSwap's order book" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
   <p style={{fontStyle: 'italic', marginTop: '0.5rem'}}>
   </p>
 </div>
@@ -162,7 +162,7 @@ BasicSwap's primary function is to help users establish a secure communication c
 ## Compatible Coins
 
 <div style={{textAlign: 'center', marginBottom: '1.5rem'}}>
-  <img src="/img/images/basicswap_wallets.png" alt="BasicSwap's wallets page" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
+  <img src="@site/static/img/images/basicswap_wallets.png" alt="BasicSwap's wallets page" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
   <p style={{fontStyle: 'italic', marginTop: '0.5rem'}}>
   </p>
 </div>
