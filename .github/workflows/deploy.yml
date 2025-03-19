@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master  # or main, depending on your default branch name
+      - master
 
 permissions:
   contents: write
@@ -30,4 +30,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          cname: docs.basicswap.org  
+          cname: docs.basicswapdex.com  
