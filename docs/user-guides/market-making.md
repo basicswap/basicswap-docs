@@ -22,7 +22,7 @@ The `createoffers.py` script overcomes this constraint by automatically maintain
 
 Using `createoffers.py`, you can ensure that your offers stay persistently listed on the order book, with periodic price updates.
 
-1. Navigate to your `/docker` folder and make sure that your BasicSwap instance is [up-to-date](/docs/basicswap-guides/update-guide).
+1. Navigate to your `/docker` folder and make sure that your BasicSwap instance is [up-to-date](/docs/user-guides/update).
 
    ```bash title="Terminal"
    git pull
