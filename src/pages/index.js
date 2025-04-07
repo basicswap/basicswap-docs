@@ -1,61 +1,43 @@
 import clsx from 'clsx';
+import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@theme/Layout';
+import HomepageFeatures from '@site/src/components/HomepageFeatures';
+
 import Heading from '@theme/Heading';
-import styles from './styles.module.css';
+import styles from './index.module.css';
 
-const FeatureList = [
-  {
-    title: 'Decentralized',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    description: (
-      <>
-        BasicSwap DEX is a fully decentralized exchange that enables peer-to-peer trading via atomic swaps without intermediaries.
-      </>
-    ),
-  },
-  {
-    title: 'Private and Secure',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    description: (
-      <>
-        Built from the ground up with a strong focus on security and privacy, BasicSwap DEX keeps your funds and information safe.
-      </>
-    ),
-  },
-  {
-    title: 'Open-Source',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        All of BasicSwap DEX's code is open-source, meaning that anyone verify its integrity and contribute to its development.
-      </>
-    ),
-  },
-];
-
-function Feature({Svg, title, description}) {
+function HomepageHeader() {
+  const {siteConfig} = useDocusaurusContext();
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <div className="container">
+        <Heading as="h1" className="hero__title">
+          {siteConfig.title}
+        </Heading>
+        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <div className={styles.buttons}>
+          <Link
+            className="button button--secondary button--lg"
+            to="/docs/intro">
+            Get Started 📚️
+          </Link>
+        </div>
       </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
-      </div>
-    </div>
+    </header>
   );
 }
 
-export default function HomepageFeatures() {
+export default function Home() {
+  const {siteConfig} = useDocusaurusContext();
   return (
-    <section className={styles.features}>
-      <div className="container">
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
-        </div>
-      </div>
-    </section>
+    <Layout
+      title={`BSX Docs Hub`}
+      description="Documentation hub for the BasicSwap DEX powered by atomic swaps.">
+      <HomepageHeader />
+      <main>
+        <HomepageFeatures />
+      </main>
+    </Layout>
   );
 }
