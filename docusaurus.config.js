@@ -68,7 +68,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'BasicSwap Docs Hub',
+        title: 'Home',
         logo: {
           alt: 'BasicSwap Logo',
           src: '/img/basicswap-logo.svg',
