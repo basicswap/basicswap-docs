@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 const FeatureList = [
   {
     title: 'Decentralized',
+    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
         BasicSwap DEX is a fully decentralized exchange that enables peer-to-peer trading via atomic swaps without intermediaries.
@@ -13,6 +14,7 @@ const FeatureList = [
   },
   {
     title: 'Private and Secure',
+    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
         Built from the ground up with a strong focus on security and privacy, BasicSwap DEX keeps your funds and information safe.
@@ -21,6 +23,7 @@ const FeatureList = [
   },
   {
     title: 'Open-Source',
+    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
         All of BasicSwap DEX's code is open-source, meaning that anyone verify its integrity and contribute to its development.
