@@ -142,6 +142,7 @@
   border-color: #2d3342;
 }
 
+/* Custom scrollbar styling similar to the screenshot */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -158,4 +159,42 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #3a4050;
+}
+
+/* Hero section text color customization */
+.hero {
+  color: white; /* This makes all text in the hero section white */
+}
+
+.hero__title {
+  color: white; /* This specifically targets the main title in the hero section */
+}
+
+.hero__subtitle {
+  color: white; /* This specifically targets the subtitle/tagline */
+}
+
+/* Make sure the Get Started button stands out against the blue background */
+.button.button--primary {
+  background-color: #242836;
+  color: white;
+  border-color: transparent;
+}
+
+.button.button--primary:hover {
+  background-color: #2d3342;
+}
+
+/* If the default styling doesn't work, try these more specific selectors */
+.main-wrapper .hero__title {
+  color: white !important;
+}
+
+.main-wrapper .hero__subtitle {
+  color: white !important;
+}
+
+/* Style the hero section background if needed */
+.hero--primary {
+  background-color: #4e7bfa; /* Keep the blue background but ensure text is white */
 }
