@@ -72,6 +72,7 @@ const config = {
         logo: {
           alt: 'BasicSwap Logo',
           src: '/img/basicswap-logo.svg',
+        },
         items: [
           {
             type: 'docSidebar',
