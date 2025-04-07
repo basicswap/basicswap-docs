@@ -71,7 +71,7 @@ const config = {
         title: 'BasicSwap Docs Hub',
         logo: {
           alt: 'BasicSwap Logo',
-          src: 'img/logo.svg',
+          src: 'img/basicswap-logo.svg', // Update this to your new logo
         },
         items: [
           {
