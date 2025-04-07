@@ -6,25 +6,156 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #4e7bfa;
+  --ifm-color-primary-dark: #3a67e6;
+  --ifm-color-primary-darker: #3057d2;
+  --ifm-color-primary-darkest: #2647be;
+  --ifm-color-primary-light: #628fff;
+  --ifm-color-primary-lighter: #76a3ff;
+  --ifm-color-primary-lightest: #8ab7ff;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #4e7bfa; /* Blue from the BasicSwap interface */
+  --ifm-color-primary-dark: #3a67e6;
+  --ifm-color-primary-darker: #3057d2;
+  --ifm-color-primary-darkest: #2647be;
+  --ifm-color-primary-light: #628fff;
+  --ifm-color-primary-lighter: #76a3ff;
+  --ifm-color-primary-lightest: #8ab7ff;
+  
+  /* Background colors from the BasicSwap dark theme */
+  --ifm-background-color: #181c27; /* Main dark background color */
+  --ifm-navbar-background-color: #1a1e2a; /* Slightly lighter than main bg */
+  --ifm-footer-background-color: #1a1e2a;
+  
+  /* Card and component background color */
+  --ifm-card-background-color: #242836; /* Box/card background color */
+  
+  /* Table colors */
+  --ifm-table-border-color: #2d3342;
+  --ifm-table-stripe-background: rgba(255, 255, 255, 0.03);
+  
+  /* Text colors */
+  --ifm-font-color-base: #ffffff;
+  --ifm-color-emphasis-600: #8e9aaf; /* Secondary text color */
+  
+  /* Code block colors */
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Styling specific elements for the dark theme */
+
+/* Navbar */
+[data-theme='dark'] .navbar {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Cards */
+[data-theme='dark'] .card {
+  border: 1px solid #2d3342;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+[data-theme='dark'] .footer {
+  border-top: 1px solid #2d3342;
+}
+
+/* Sidebar */
+[data-theme='dark'] .menu {
+  background-color: #1a1e2a;
+}
+
+[data-theme='dark'] .menu__link--active {
+  background-color: #242836;
+}
+
+[data-theme='dark'] .menu__link:hover {
+  background-color: #242836;
+}
+
+/* Tables */
+[data-theme='dark'] .table {
+  border-color: #2d3342;
+}
+
+[data-theme='dark'] thead {
+  background-color: #242836;
+}
+
+[data-theme='dark'] th {
+  border-color: #2d3342;
+}
+
+[data-theme='dark'] tr:nth-of-type(even) {
+  background-color: #1e222f;
+}
+
+[data-theme='dark'] td {
+  border-color: #2d3342;
+}
+
+/* Buttons */
+[data-theme='dark'] .button--primary {
+  background-color: #4e7bfa;
+  border-color: #4e7bfa;
+}
+
+[data-theme='dark'] .button--primary:hover {
+  background-color: #3a67e6;
+  border-color: #3a67e6;
+}
+
+[data-theme='dark'] .button--secondary {
+  color: #ffffff;
+  background-color: #242836;
+  border-color: #2d3342;
+}
+
+[data-theme='dark'] .button--secondary:hover {
+  background-color: #2a2f3e;
+  border-color: #3a4050;
+}
+
+/* Tabs */
+[data-theme='dark'] .tabs {
+  border-bottom-color: #2d3342;
+}
+
+[data-theme='dark'] .tabs__item {
+  color: #8e9aaf;
+}
+
+[data-theme='dark'] .tabs__item--active {
+  color: #4e7bfa;
+  border-bottom-color: #4e7bfa;
+}
+
+/* Admonitions (callouts) */
+[data-theme='dark'] .alert {
+  background-color: #242836;
+  border-color: #2d3342;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1e2a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d3342;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a4050;
 }
