@@ -24,12 +24,12 @@ BasicSwap stands as the world's most secure and decentralized DEX, facilitating 
 This fully non-custodial platform features a decentralized order book where users can make or take swap offers without fees, counterparties, or account requirements. 
 
 <div style={{textAlign: 'center', marginBottom: '1.5rem'}}>
-  <img src="/basicswap-docs/img/images/basicswap_orders.png" alt="BasicSwap's order book" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
+  <img src="/img/images/basicswap_orders.png" alt="BasicSwap's order book" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
   <p style={{fontStyle: 'italic', marginTop: '0.5rem'}}>
   </p>
 </div>
 
-Only the two participants of a swap are involved in any part of the trading process. A swap consists of a series of messages exchanged between parties, each containing necessary data that allows progression to the next step of the transaction.
+Only the two participants of a swap are involved in any part of the trading process. A swap consists of a series of messages exchanged between parties, each containing necessary data that allows progression to the next step of the transaction. 
 
 To preserve decentralization and privacy, all communication occurs over the **SecureMessaging Network** (SMSG), a privacy-first decentralized mixnet built on the Particl blockchain. Each message sent through the network is encrypted such that only the intended recipient can decrypt its content. Messages are relayed by the entire network, ensuring both privacy and resilience against censorship or targeted attacks. 
 
@@ -162,7 +162,7 @@ BasicSwap's primary function is to help users establish a secure communication c
 ## Compatible Coins
 
 <div style={{textAlign: 'center', marginBottom: '1.5rem'}}>
-  <img src="/basicswap-docs/img/images/basicswap_wallets.png" alt="BasicSwap's wallets page" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
+  <img src="/img/images/basicswap_wallets.png" alt="BasicSwap's wallets page" style={{borderRadius: '8px', maxWidth: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}/>
   <p style={{fontStyle: 'italic', marginTop: '0.5rem'}}>
   </p>
 </div>
