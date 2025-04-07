@@ -49,21 +49,6 @@ const config = {
             'https://github.com/basicswap/basicswap-docs/tree/main/docs/',
         },
         blog: false,
-        // blog: {
-        //   showReadingTime: true,
-        //   feedOptions: {
-        //     type: ['rss', 'atom'],
-        //     xslt: true,
-        //   },
-        //   // Please change this to your repo.
-        //   // Remove this to remove the "edit this page" links.
-        //   editUrl:
-        //     'https://github.com/basicswap/basicswap-docs/tree/main/docs/',
-        //   // Useful options to enforce blogging best practices
-        //   onInlineTags: 'warn',
-        //   onInlineAuthors: 'warn',
-        //   onUntruncatedBlogPosts: 'warn',
-        // },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -74,13 +59,19 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Set dark mode as default to match BasicSwap interface
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
+      },
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'BasicSwap Docs Hub',
+        title: 'Home',
         logo: {
           alt: 'BasicSwap Logo',
-          src: 'img/logo.svg',
+          src: '/img/basicswap-logo.svg',
         },
         items: [
           {
