@@ -230,21 +230,23 @@ After creating BasicSwap's Docker image, it's time to configure it to your prefe
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
+    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
     
     ```bash title="Terminal"
     docker run --rm -t --name swap_prepare -v $COINDATA_PATH:/coindata i_swapclient basicswap-prepare --datadir=/coindata --withcoins=monero,bitcoin --htmlhost="0.0.0.0" --wshost="0.0.0.0" --xmrrestoreheight=$CURRENT_XMR_HEIGHT --usebtcfastsync
     ```
 
-    7. Note down and store the mnemonic provided by the above command in a safe place. It serves as your backup key and is valid for all enabled coins.
+    8. Note down and store the mnemonic provided by the above command in a safe place. It serves as your backup key and is valid for all enabled coins.
 
-    8. Note down the result of the following command, it will speed up the process of recovering your Monero if needed. 
+    9. Note down the result of the following command, it will speed up the process of recovering your Monero if needed. 
     
     ```bash title="Terminal"
     echo $CURRENT_XMR_HEIGHT
     ```
 
-    9. **(Optional)** Adjust your timezone by specifying the appropriate `TZ` value in your `.env` file, located within the BasicSwap Docker directory. Use the `timedatectl list-timezones` command to view valid timezone options.
+    10. **(Optional)** Adjust your timezone by specifying the appropriate `TZ` value in your `.env` file, located within the BasicSwap Docker directory. Use the `timedatectl list-timezones` command to view valid timezone options.
     
     ```bash title="Terminal"
     nano .env
@@ -271,21 +273,23 @@ After creating BasicSwap's Docker image, it's time to configure it to your prefe
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
+    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
     
     ```bash title="Terminal"
     docker run --rm -t --name swap_prepare -v $COINDATA_PATH:/coindata i_swapclient basicswap-prepare --datadir=/coindata --withcoins=monero,bitcoin --htmlhost="0.0.0.0" --wshost="0.0.0.0" --xmrrestoreheight=$CURRENT_XMR_HEIGHT --usebtcfastsync
     ```
 
-    7. Note down and store the mnemonic provided by the above command in a safe place. It serves as your backup key and is valid for all enabled coins.
+    8. Note down and store the mnemonic provided by the above command in a safe place. It serves as your backup key and is valid for all enabled coins.
 
-    8. Note down the result of the following command, it will speed up the process of recovering your Monero if needed. 
+    9. Note down the result of the following command, it will speed up the process of recovering your Monero if needed. 
     
     ```bash title="Terminal"
     echo $CURRENT_XMR_HEIGHT
     ```
 
-    9. **(Optional)** Adjust your timezone by specifying the appropriate `TZ` value in your `.env` file, located within the BasicSwap Docker directory. Use the `timedatectl list-timezones` command to view valid timezone options.
+    10. **(Optional)** Adjust your timezone by specifying the appropriate `TZ` value in your `.env` file, located within the BasicSwap Docker directory. Use the `timedatectl list-timezones` command to view valid timezone options.
     
     ```bash title="Terminal"
     nano .env
@@ -442,7 +446,9 @@ Once the installation is complete, configure BasicSwap according to your require
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
+    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
     
     ```bash title="Terminal"
     basicswap-prepare --datadir=$SWAP_DATADIR --withcoins=monero,bitcoin --xmrrestoreheight=$CURRENT_XMR_HEIGHT --usebtcfastsync
@@ -467,7 +473,9 @@ Once the installation is complete, configure BasicSwap according to your require
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
+    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
     
     ```bash title="Terminal"
     basicswap-prepare --datadir=$SWAP_DATADIR --withcoins=monero,bitcoin --xmrrestoreheight=$CURRENT_XMR_HEIGHT --usebtcfastsync
