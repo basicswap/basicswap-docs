@@ -173,7 +173,7 @@ BasicSwap's primary function is to help users establish a secure communication c
       <li><strong>Bitcoin (BTC)</strong> - The original cryptocurrency</li>
       <li><strong>Litecoin (LTC)</strong> - Faster and cheaper Bitcoin alternative wiht privacy</li>
       <li><strong>Bitcoin Cash (BCC)</strong> - Bitcoin fork focused on payments</li>
-      <li><strong>Dogecoin (DOGE)</strong> - Bitcoin with dogs</li> 
+      <li><strong>Dogecoin (DOGE)</strong> - Bitcoin with dogs</li>
       <li><strong>Namecoin (NMC)</strong> - Decentralized DNS and public key infrastructure</li>
     </ul>
   </TabItem>
