@@ -47,7 +47,7 @@ If you've built BasicSwap using the Docker method, follow these steps to enable 
     docker-compose stop
     ```
 
-    2. Disable a coin by running the command below, replacing bitcoin with the specific coin you wish to enable after the `--disablecoin` parameter.
+    2. Disable a coin by running the command below, replacing bitcoin with the specific coin you wish to disable after the `--disablecoin` parameter.
     
     ```bash title="Terminal"
     docker-compose run --rm swapclient basicswap-prepare --datadir=/coindata --disablecoin=bitcoin
@@ -92,37 +92,19 @@ Linux users can simplify the process of adding and removing coins with community
   <TabItem value="disable-coins-no-docker" label="Disable Coins">
     1. Stop BasicSwap completely.
 
-    2. Remove the coin's record in your `basicswap.json` config file.
+    2. Disable a coin by running the command below, replacing bitcoin with the specific coin you wish to disable after the `--disablecoin` parameter.
     
     ```bash title="Terminal"
-    sudo nano /Users/$USER/coinswaps/basicswap.json
+    export SWAP_DATADIR=$HOME/coinswaps
+    source $SWAP_DATADIR/venv/bin/activate
+    basicswap-prepare --datadir=$SWAP_DATADIR --disablecoin=bitcoin
     ```
 
-    In this example, here is what you would remove from `basicswap.json` to disable Monero.
+    3. Launch BasicSwap normally.
     
-    ```json title="basicswap.json"
-    "monero": {
-            "connection_type": "rpc",
-            "manage_daemon": true,
-            "manage_wallet_daemon": true,
-            "rpcport": 29798,
-            "zmqport": 30898,
-            "walletrpcport": 29998,
-            "rpchost": "127.0.0.1",
-            "walletrpchost": "127.0.0.1",
-            "walletrpcuser": "xmr_wallet_user",
-            "walletrpcpassword": "xmr_wallet_pwd",
-            "walletfile": "swap_wallet",
-            "datadir": "/coindata/monero",
-            "bindir": "/coindata/bin/monero",
-            "restore_height": 2731435,
-            "blocks_confirmed": 7,
-            "walletsdir": "/coindata/monero"
-    },
+    ```bash title="Terminal"
+    basicswap-run --datadir=$SWAP_DATADIR
     ```
 
-    3. Save the changes with `CTRL + X`, followed by an `ENTER`.
-
-    4. Launch BasicSwap normally.
   </TabItem>
 </Tabs>
