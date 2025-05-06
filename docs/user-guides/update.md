@@ -78,7 +78,7 @@ If you've built BasicSwap using the Docker method, follow these steps to update 
     
     ```bash title="Terminal" showLineNumbers
     docker-compose run --rm swapclient \ 
-    basicswap-prepare --datadir=/coindata --preparebinonly --withcoins=monero,bitcoin
+    basicswap-prepare --datadir=/coindata --upgradecores
     ```
   </TabItem>
 </Tabs>
@@ -138,7 +138,7 @@ Linux users can simplify the update process with community-maintained automation
     3. Apply coin core updates to your BasicSwap instance. Make sure to input what coin core(s) you want to update using the `--withcoins` argument.
     
     ```bash title="Terminal"
-    basicswap-prepare --datadir=$SWAP_DATADIR --preparebinonly --withcoins=monero,bitcoin
+    basicswap-prepare --datadir=$SWAP_DATADIR --upgradecores
     ```
   </TabItem>
 </Tabs>
