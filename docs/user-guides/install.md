@@ -33,25 +33,25 @@ Watch particularly for permission issues, dependency failures, or network connec
   </TabItem>
   <TabItem value="linux" label="Linux">
     <div style={{padding: '1.5rem', background: 'linear-gradient(135deg, #3b82f6, #1e40af)', color: 'white', borderRadius: '8px', marginBottom: '1rem'}}>
-      <h3>Linux Scripts Suite</h3>
-      <p>For Linux users, the simplest installation method is through community-developed scripts:</p>
+      <h3>Linux, Mac, and WSL Script Suite</h3>
+      <p>For Linux users on various distributions, as well as WSL and MacOS, the simplest installation method is through community-developed scripts:</p>
       <ol>
-        <li>Download the scripts from <a href="https://github.com/nahuhh/basicswap-bash/releases" style={{color: 'white', textDecoration: 'underline'}}>GitHub</a></li>
-        <li>Make the script executable:</li>
+        <li>Clone the scripts from <a href="https://github.com/nahuhh/basicswap-bash/" style={{color: 'white', textDecoration: 'underline'}}>GitHub</a></li>
       </ol>
       
       ```bash title="Terminal"
-      chmod +x basicswap-install.sh
+      git clone https://github.com/nahuhh/basicswap-bash.git || exit
+      cd basicswap-bash
       ```
       
-      <ol start="3">
+      <ol start="2">
         <li>Run the installation script:</li>
       </ol>
       
       ```bash title="Terminal"
       ./basicswap-install.sh
       ```
-      <p>This collection of scripts automates common setup tasks, including installing, adding/removing/updating coin cores, updating BasicSwap, and enabling Tor.</p>
+      <p>This collection of scripts automates configuration and management, including installing and updating BasicSwap, enabling/disabling/updating coin cores, enabling/disabling Tor, client auth & more.</p>
     </div>
   </TabItem>
 </Tabs>
