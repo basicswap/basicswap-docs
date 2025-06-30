@@ -1,84 +1,114 @@
 ---
 sidebar_position: 7
-title: Automated Market Making
-description: "How to use the automated market making tool for BasicSwap DEX"
+title: GUI-Based Automated Market Making
+description: "How to use the integrated automated market making (AMM) tool in the BasicSwap DEX GUI."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import React from 'react';
 
-# Automated Market Making Script
+# GUI-Based Automated Market Making (AMM)
 
-BasicSwap DEX offers specialized tools to help you efficiently provide liquidity and manage your trading positions. This comprehensive guide provides detailed instructions for leveraging these powerful features.
+This guide explains how to use the Automated Market Making (AMM) tool integrated into the BasicSwap user interface. The AMM tool helps you provide liquidity with low effort by automating offer management.
 
-## Offer Management
+## Key Features
 
-BasicSwap imposes a 48-hour maximum lifespan for order book listings due to limitations in the SecureMessaging (SMSG) network protocol. 
+The AMM page incorporates all functionalities from the original companion script, alongside additional quality-of-life features. These include:
 
-The `createoffers.py` script overcomes this constraint by automatically maintaining your offers on the order book while allowing dynamic adjustment of trading parameters.
+*   **Automatic Offer Republication**: Automatically republishes offers on the order book upon expiry.
+*   **Automatic Price Adjustments**: Adjusts offer rates based on the market price of each coin (a configurable percentage above or below market price).
+*   **Automatic Offer Size Adjustments**: Adjusts the amount of coins offered when previous offers are partially filled.
+*   **Market Buy/Sell**: Accepts offers up to a desired rate, then sets a new offer until the full desired amount is fulfilled.
+*   **Automatic Startup**: Starts the AMM tool automatically with BasicSwap.
+*   **GUI Configuration**: Configure all AMM settings directly from the user interface.
+*   **Swap Type Selection**: Choose between Secret Hash or Adaptor Signature swap types.
+*   **Price Source Selection**: Select the method used to determine automatic price adjustments.
 
-### Automatically Republish Offers and Adjust Prices
+## How it Works
 
-Using `createoffers.py`, you can ensure that your offers stay persistently listed on the order book, with periodic price updates.
+### Automatic Republication of Offers
 
-1. Navigate to your `/docker` folder and make sure that your BasicSwap instance is [up-to-date](/docs/user-guides/update).
+BasicSwap offers have a set expiration time due to limitations of the SMSG P2P network. This previously required you to manually republish offers. With the AMM integration, this manual process is no longer necessary. You can set your offers within the tool and configure them for automatic republication upon expiry.
 
-   ```bash title="Terminal"
-   git pull
-   docker-compose build
-   ```
+### Automatic Price Adjustments
 
-2. Navigate to the `/scripts` folder.
+This feature automatically adjusts your offer's rate based on the current market price of both coins in the pair.
 
-3. Enable the script's configuration file by renaming it `createoffers.json`.
+You can choose from various methods to determine the market rate:
+*   **CoinGecko API**: Fetches the price from CoinGecko.
+*   **BasicSwap Order Book**: Uses the best rate of auto-accept offers on BasicSwap's own order book (no external connection).
+*   **Combined Methods**: Use different combinations of the above, including a static and/or fixed minimum rate.
 
-   ```bash title="Terminal"
-   cp template_createoffers.json createoffers.json
-   ```
+You can also set a **premium** on the market rate (a percentage above or below). This allows you to set offers that can guarantee a profit margin over the market rate at the time the offer was published.
 
-4. Open the `createoffers.json` file in a text editor.
+### Automatic Offer Size Adjustments
 
-   ```bash title="Terminal"
-   nano createoffers.json
-   ```
+If you have a set inventory of a coin to offer, your offers need to reflect the remaining inventory after partial fills. For example, if you start with 100 Litecoins and a 20 Litecoin partial swap occurs, you are left with 80 Litecoins. The next time your offer is automatically republished, it will account for this reduced inventory.
 
-5. Edit the file and set the correct parameters by modifying the following values to your preferences.
+Once you configure your "Offer Size Increment" parameter, the AMM manages this entire process seamlessly in the background.
 
-   * `coin_from`: The coin you want to send.
-   
-   * `coin_to`: The coin you want to receive in exchange of your `coin_from`.
-   
-   * `amount`: The number of `coin_from` coins you want to offer on the books.
-   
-   * `amount_step`: Set a size increment to ensure offers are posted up to the desired `amount`.
-   
-   * `min_coin_from_amt`: Reserved balance. Minimum coin balance for the script to automatically post offers.
-   
-   * `minrate`: This refers to the lowest acceptable rate under which the script should not consider an offer. Note that this isn't the effective exchange rate, but merely the absolute minimum rate you deem acceptable. The script will refrain from publishing offers on the books that fall below this value, thereby offering protection against sudden and unexpected liquidity spikes.
-   
-   * `ratetweakpercent`: This parameter specifies the percentage above or below the current market price (as reported by CoinGecko's API) at which you want to list your orders. For instance, if you set this to a value of 5, your offers will be listed at 5% above the market reported price. This feature automates the process of listing profitable offers on the order book.
-   
-   * `amount_variable`: Either `True` or `False`, determines whether you permit your offer to be partially fulfilled. For example, if you enable this option (set it to `True`), someone could fulfill just 25 PART of your 100 PART offer instead of the entire amount.
-   
-   * `address`: This refers to your swap identity or swap address. You have the option to specify one (this would be a Particl address from your BasicSwap Particl wallet), or if you prefer, you can set this to -1, which will prompt the system to generate a new random address each time your offer is updated.
-   
-   * `name`: The name of your offer. Keep it as `offer 0`, `offer 1`, and so on.
-   
-   * `min_swap_amount`: This refers to the smallest amount of coins a bid must request for the script to automatically accept the offer. Remember that each transaction incurs on-chain transaction fees. Thus, it may be beneficial to set this value higher than the current on-chain fees.
-   
-   * `offer_valid_seconds`: This parameter determines the duration (in seconds) for which your offer will remain on the books. After this time has elapsed, your offer will be re-published with a price adjustment, provided the script is still in operation. For instance, setting it to `3600` will prompt the script to re-publish your offer every hour with a revised price (current market price + `ratetweakpercent`). This parameter can be set universally instead of on a per-order basis.
-   
-   * `swap_type`: The script defaults to publishing offers using the more private `adaptor_sig` swap type, which requires the offering blockchain to contain a transaction malleability fix (i.e., Segwit). If that's not the case for your offer, you'll need to change this to `secret_hash`.
+### Market Buys and Sells (Experimental)
 
-   To save changes, press `CTRL + X`, then `Y + ENTER`.
+The AMM tool introduces a "market buy/sell" functionality through the **Bids** function. This is currently an experimental feature.
 
-6. **With BasicSwap running in the background**, start the python script.
+While the AMM's primary role is to automatically place dynamic offers, you can enable a feature to also place bids at a desired rate. If a bid's size exceeds the available quantity at a specific rate, the AMM will take the existing offer and then immediately place a new offer for the remaining amount of your initial bid.
 
-   ```bash title="Terminal"
-   python createoffers.py
-   ```
+**Example:** You want to acquire 10 Monero for 10 Litecoin (1.0 ratio). An offer for 5 Monero for 5 Litecoin exists at that rate. The AMM will first accept the entire 5 Monero offer. Then, it will place a new offer at the same rate for the remaining 5 Monero.
 
-   :::tip
-   The script requires continuous execution to remain active; closing the terminal will terminate the process. To maintain persistent operation, we recommend running it within a terminal multiplexer like[Byobu](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-byobu-for-terminal-management-on-ubuntu-16-04) or [screen](https://linuxize.com/post/how-to-use-linux-screen/).
-   :::
+#### How to Enable Market Buys and Sells
+
+As this feature is experimental, it requires manual activation.
+1.  Navigate to the **Settings** page.
+2.  In the **General** tab, activate both `debug` and `debug_ui`.
+
+This feature will be integrated into the stable set of functionalities in the future, removing the need for manual activation.
+
+## AMM User Interface Breakdown
+
+### Main Screen
+
+The main AMM screen provides a central hub for managing your automated offers.
+
+*   **Offers Table**: Displays all your offers, their status (enabled/disabled), and main parameters.
+*   **Create New Offer**: Button to create a new automatic offer.
+*   **Refresh Button**: Refreshes the offer table with the most recent information.
+*   **Edit/Remove**: Options to edit or remove an existing offer.
+*   **AMM Control Center**: Start or stop all automatic offers.
+*   **Global Configuration**: Modify global AMM parameters.
+
+### Create a New Offer
+
+This form allows you to define the parameters for a new automated offer.
+
+*   **Local Name/Label**: A private name for your offer (not visible to others).
+*   **Enable/Disable Offer**: Controls if the offer is active. Disabled offers will not be republished.
+*   **Maker Coin**: The coin you are offering.
+*   **Taker Coin**: The coin you want to receive.
+*   **Total Offer Amount**: The total quantity of the maker coin you are offering. This amount is reduced after partial fills.
+*   **Minimum Rate**: The absolute lowest rate at which you are willing to sell. This protects against price drops.
+*   **Rate Tweak Percentage**: The percentage above or below the market price for your offer. E.g., a value of "1" on a $330 market price results in a $333 offer price ($330 + 1%).
+*   **Minimum Wallet Balance**: The minimum balance required in your wallet for the offer to be republished.
+*   **Offer Expiry Time (seconds)**: How long your offer remains on the order book before republication. Shorter durations mean more frequent rate updates.
+*   **SMSG Identity**: The SMSG identity to publish your offer from. Can be randomized for new offers.
+*   **Swap Protocol**: The swap protocol for your offer (Adaptor Signature or Secret Hash).
+*   **Minimum Bid Amount**: The minimum amount required for a bid on your offer to be automatically accepted.
+*   **Offer Size Adjustment Precision**: The precision of offer size adjustments after a partial fill.
+*   **Coin Rate/Price Calculation Method**: How coin rates are determined. "Static" disables automatic price adjustments.
+
+### Create a Bid
+
+This form allows you to create automated bids to acquire coins.
+
+*   **Local Name/Label**: A private name for your bid (not visible to others).
+*   **Enable/Disable Offer**: Controls if the bid is active.
+*   **Maker Coin**: The coin you are offering.
+*   **Taker Coin**: The coin you want to acquire.
+*   **Total Offer Amount**: The total quantity of the maker coin you are offering for this bid.
+*   **Maximum Rate**: The absolute highest rate you are willing to pay. This protects against price spikes.
+*   **Minimum Coin to Balance**: The minimum balance required in your wallet for a bid to be placed.
+*   **Max Concurrent**: Maximum number of active bids at once.
+*   **Offers to Bid On**: Filter which offer types to bid on: `auto_accept_only` (default), `all`, or `known_only`.
+*   **SMSG Identity**: The SMSG identity to publish your bid from.
+*   **Minimum Swap Amount**: The minimum number of coins required for a swap to take place.
+*   **Use Balance Bidding**: Automatically calculates the bid size based on your total coin balance minus the offer’s minimum amount.
