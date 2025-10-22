@@ -371,7 +371,7 @@ The first step to running BasicSwap without docker is to build it locally on you
     3. Install the required dependencies
     
     ```bash title="Terminal"
-    brew install python git gnupg pkg-config jq
+    brew install python git gnupg pkg-config jq zeromq
     ```
 
     4. Close the terminal and open a new one. This will update the python symlinks and let you progress through the next steps.
