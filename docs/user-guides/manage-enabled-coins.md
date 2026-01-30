@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: Manage Enabled Coins
 description: "How to manage enabled coins on BasicSwap DEX"
 ---
@@ -10,12 +10,12 @@ import React from 'react';
 
 # Manage Enabled Coins
 
-BasicSwap DEX operates as a fully non-custodial exchange, giving you complete control over your assets throughout the trading process. This architecture provides significant security and privacy advantages but requires running a full node for each cryptocurrency you enable.
+BasicSwap DEX operates as a fully non-custodial exchange, giving you complete control over your assets throughout the trading process. This architecture provides significant security and privacy advantages but requires running a full node for most enabled cryptocurrencies. Bitcoin and Litecoin also support an optional [Electrum light wallet mode](/docs/user-guides/electrum) as a lightweight alternative to full nodes.
 
 This comprehensive guide explains all aspects of coin management within the BasicSwap environment, from enabling currencies to monitoring blockchain synchronization and managing wallets.
 
 :::info
-In the current beta release, BasicSwap requires running full blockchain nodes locally for each enabled cryptocurrency. Solutions such as light nodes and third-party integrations are being considered and/or worked on by our community of open-source contributors and should eventually go live.  
+Most coins require running full blockchain nodes locally. However, **Bitcoin** and **Litecoin** support [Electrum light wallet mode](/docs/user-guides/electrum), which connects to remote ElectrumX servers instead of downloading the full blockchain. Light wallet support for additional coins is being considered by the community of open-source contributors.
 :::
 
 ## Enable Coins
@@ -28,7 +28,11 @@ To trade with additional cryptocurrencies such as Bitcoin, Litecoin, or Monero, 
 
 When operating BasicSwap, your device functions as a full node for each enabled cryptocurrency (such as Bitcoin), requiring complete blockchain synchronization before trading.
 
-To check current synchronization progress:
+:::tip
+Coins running in [Electrum light wallet mode](/docs/user-guides/electrum) (available for Bitcoin and Litecoin) do not require blockchain synchronization. They connect to remote Electrum servers and are ready to use as soon as a server connection is established. The wallet page will show the connected server and connection status instead of a sync progress bar.
+:::
+
+To check current synchronization progress for full node coins:
 
 1. Access the Wallets page by selecting the `Wallets` tab on the BasicSwap interface.
 

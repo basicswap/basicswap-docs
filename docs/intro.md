@@ -170,8 +170,8 @@ BasicSwap's primary function is to help users establish a secure communication c
 <Tabs>
   <TabItem value="bitcoin" label="Bitcoin & Forks" default>
     <ul>
-      <li><strong>Bitcoin (BTC)</strong> - The original cryptocurrency</li>
-      <li><strong>Litecoin (LTC)</strong> - Faster and cheaper Bitcoin alternative with privacy</li>
+      <li><strong>Bitcoin (BTC)</strong> - The original cryptocurrency (supports <a href="/docs/user-guides/electrum">light wallet mode</a>)</li>
+      <li><strong>Litecoin (LTC)</strong> - Faster and cheaper Bitcoin alternative with privacy (supports <a href="/docs/user-guides/electrum">light wallet mode</a>)</li>
       <li><strong>Bitcoin Cash (BCC)</strong> - Bitcoin fork focused on payments</li>
       <li><strong>Dogecoin (DOGE)</strong> - Bitcoin with dogs</li>
       <li><strong>Namecoin (NMC)</strong> - Decentralized DNS and public key infrastructure</li>

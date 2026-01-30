@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: Enable or Disable Coins
 description: "How to enable or disable coins on your BasicSwap DEX instance"
 ---
@@ -31,10 +31,17 @@ If you've built BasicSwap using the Docker method, follow these steps to enable 
     ```
     
     2. Add a cryptocurrency to your BasicSwap instance by running the command below, replacing bitcoin with the specific coin you wish to enable after the `--addcoin` parameter.
-    
+
     ```bash title="Terminal"
     docker-compose run --rm swapclient basicswap-prepare --datadir=/coindata --addcoin=bitcoin
     ```
+
+    :::tip
+    When adding **Bitcoin** or **Litecoin**, you can enable [Electrum light wallet mode](/docs/user-guides/electrum) to avoid downloading their full blockchains. Add `--btc-mode=electrum` or `--ltc-mode=electrum` to the command:
+    ```bash title="Terminal"
+    docker-compose run --rm swapclient basicswap-prepare --datadir=/coindata --addcoin=bitcoin --btc-mode=electrum
+    ```
+    :::
 
     :::tip
     You can copy an existing pruned datadir (excluding `bitcoin.conf` and any wallets) over to `$COINDATA_PATH/bitcoin`. Remove any existing wallets after copying over a pruned chain, or the Bitcoin daemon won't start.
@@ -74,14 +81,21 @@ Linux users can simplify the process of adding and removing coins with community
     1. Stop BasicSwap completely.
 
     2. Add a cryptocurrency to your BasicSwap instance by running the command below, replacing bitcoin with the specific coin you wish to enable after the `--addcoin` parameter.
-    
-    ```bash title="Terminal" 
+
+    ```bash title="Terminal"
     basicswap-prepare --usebtcfastsync --datadir=$SWAP_DATADIR --addcoin=bitcoin
     ```
 
+    :::tip
+    When adding **Bitcoin** or **Litecoin**, you can enable [Electrum light wallet mode](/docs/user-guides/electrum) to avoid downloading their full blockchains. Add `--btc-mode=electrum` or `--ltc-mode=electrum` to the command:
+    ```bash title="Terminal"
+    basicswap-prepare --datadir=$SWAP_DATADIR --addcoin=bitcoin --btc-mode=electrum
+    ```
+    :::
+
     3. Apply the changes to your BasicSwap instance.
-    
-    ```bash title="Terminal" 
+
+    ```bash title="Terminal"
     . $SWAP_DATADIR/venv/bin/activate && python -V
     ```
 
