@@ -58,7 +58,7 @@ Watch particularly for permission issues, dependency failures, or network connec
 
 ## Install Using Docker
 
-BasicSwap is currently in beta stage and doesn't offer pre-compiled executables or integrations with third-party services (upcoming). You'll need to compile the source code and run a full node on your device. 
+BasicSwap is currently in beta stage and doesn't offer pre-compiled executables or integrations with third-party services (upcoming). You'll need to compile the source code and run a full node on your device for most coins. However, **Bitcoin and Litecoin** support an optional [Electrum light wallet mode](/docs/user-guides/lightweight-modes) that eliminates the need to sync their full blockchains, while **Monero** and **Wownero** support [remote node mode](/docs/user-guides/lightweight-modes#monero-remote-nodes) to avoid running a local daemon.
 
 ### Install Docker
 
@@ -230,24 +230,28 @@ After creating BasicSwap's Docker image, it's time to configure it to your prefe
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+    6. **(Optional)** To use [Electrum light wallets](/docs/user-guides/lightweight-modes) instead of full nodes for Bitcoin and/or Litecoin, add the `--light` flag (enables Electrum for all supported coins) or use per-coin flags like `--btc-mode=electrum` or `--ltc-mode=electrum`.
 
-    7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
-    
+    7. **(Optional)** To use a [remote Monero node](/docs/user-guides/lightweight-modes#monero-remote-nodes) instead of running a local Monero daemon, prefix the command with `XMR_RPC_HOST` and `XMR_RPC_PORT` environment variables (e.g., `-e XMR_RPC_HOST="node2.monerodevs.org" -e XMR_RPC_PORT=18089`).
+
+    8. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    9. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
+
     ```bash title="Terminal"
     docker run --rm -t --name swap_prepare -v $COINDATA_PATH:/coindata i_swapclient basicswap-prepare --datadir=/coindata --withcoins=monero,bitcoin --htmlhost="0.0.0.0" --wshost="0.0.0.0" --xmrrestoreheight=$CURRENT_XMR_HEIGHT --usebtcfastsync
     ```
 
-    8. Note down and store the mnemonic provided by the above command in a safe place. It serves as your backup key and is valid for all enabled coins.
+    10. Note down and store the mnemonic provided by the above command in a safe place. It serves as your backup key and is valid for all enabled coins.
 
-    9. Note down the result of the following command, it will speed up the process of recovering your Monero if needed. 
-    
+    11. Note down the result of the following command, it will speed up the process of recovering your Monero if needed.
+
     ```bash title="Terminal"
     echo $CURRENT_XMR_HEIGHT
     ```
 
-    10. **(Optional)** Adjust your timezone by specifying the appropriate `TZ` value in your `.env` file, located within the BasicSwap Docker directory. Use the `timedatectl list-timezones` command to view valid timezone options.
-    
+    12. **(Optional)** Adjust your timezone by specifying the appropriate `TZ` value in your `.env` file, located within the BasicSwap Docker directory. Use the `timedatectl list-timezones` command to view valid timezone options.
+
     ```bash title="Terminal"
     nano .env
     ```
@@ -256,15 +260,15 @@ After creating BasicSwap's Docker image, it's time to configure it to your prefe
   </TabItem>
   <TabItem value="linux" label="Linux">
     1. Open a terminal.
-    
+
     2. Navigate to BasicSwap's Docker folder.
-    
+
     ```bash title="Terminal"
     cd basicswap/docker/
     ```
 
     3. Set `xmrrestoreheight` to Monero's current chain height.
-    
+
     ```bash title="Terminal"
     CURRENT_XMR_HEIGHT=$(curl -s http://node2.monerodevs.org:18089/get_info | jq .height)
     ```
@@ -273,23 +277,27 @@ After creating BasicSwap's Docker image, it's time to configure it to your prefe
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+    6. **(Optional)** To use [Electrum light wallets](/docs/user-guides/lightweight-modes) instead of full nodes for Bitcoin and/or Litecoin, add the `--light` flag (enables Electrum for all supported coins) or use per-coin flags like `--btc-mode=electrum` or `--ltc-mode=electrum`.
 
-    7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
-    
+    7. **(Optional)** To use a [remote Monero node](/docs/user-guides/lightweight-modes#monero-remote-nodes) instead of running a local Monero daemon, prefix the command with `XMR_RPC_HOST` and `XMR_RPC_PORT` environment variables (e.g., `-e XMR_RPC_HOST="node2.monerodevs.org" -e XMR_RPC_PORT=18089`).
+
+    8. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    9. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
+
     ```bash title="Terminal"
     docker run --rm -t --name swap_prepare -v $COINDATA_PATH:/coindata i_swapclient basicswap-prepare --datadir=/coindata --withcoins=monero,bitcoin --htmlhost="0.0.0.0" --wshost="0.0.0.0" --xmrrestoreheight=$CURRENT_XMR_HEIGHT --usebtcfastsync
     ```
 
-    8. Note down and store the mnemonic provided by the above command in a safe place. It serves as your backup key and is valid for all enabled coins.
+    10. Note down and store the mnemonic provided by the above command in a safe place. It serves as your backup key and is valid for all enabled coins.
 
-    9. Note down the result of the following command, it will speed up the process of recovering your Monero if needed. 
-    
+    11. Note down the result of the following command, it will speed up the process of recovering your Monero if needed.
+
     ```bash title="Terminal"
     echo $CURRENT_XMR_HEIGHT
     ```
 
-    10. **(Optional)** Adjust your timezone by specifying the appropriate `TZ` value in your `.env` file, located within the BasicSwap Docker directory. Use the `timedatectl list-timezones` command to view valid timezone options.
+    12. **(Optional)** Adjust your timezone by specifying the appropriate `TZ` value in your `.env` file, located within the BasicSwap Docker directory. Use the `timedatectl list-timezones` command to view valid timezone options.
     
     ```bash title="Terminal"
     nano .env
@@ -446,10 +454,14 @@ Once the installation is complete, configure BasicSwap according to your require
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+    6. **(Optional)** To use [Electrum light wallets](/docs/user-guides/lightweight-modes) instead of full nodes for Bitcoin and/or Litecoin, add the `--light` flag (enables Electrum for all supported coins) or use per-coin flags like `--btc-mode=electrum` or `--ltc-mode=electrum`.
 
-    7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
-    
+    7. **(Optional)** To use a [remote Monero node](/docs/user-guides/lightweight-modes#monero-remote-nodes) instead of running a local Monero daemon, prefix the command with `XMR_RPC_HOST` and `XMR_RPC_PORT` environment variables (e.g., `XMR_RPC_HOST="node2.monerodevs.org" XMR_RPC_PORT=18089`).
+
+    8. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    9. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
+
     ```bash title="Terminal"
     basicswap-prepare --datadir=$SWAP_DATADIR --withcoins=monero,bitcoin --xmrrestoreheight=$CURRENT_XMR_HEIGHT --usebtcfastsync
     ```
@@ -458,13 +470,13 @@ Once the installation is complete, configure BasicSwap according to your require
     1. Open a terminal.
 
     2. Navigate to your BasicSwap folder.
-    
+
     ```bash title="Terminal"
     cd $HOME/coinswaps
     ```
 
     3. Set `xmrrestoreheight` to Monero's current chain height.
-    
+
     ```bash title="Terminal"
     CURRENT_XMR_HEIGHT=$(curl -s http://node2.monerodevs.org:18089/get_info | jq .height)
     ```
@@ -473,10 +485,14 @@ Once the installation is complete, configure BasicSwap according to your require
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+    6. **(Optional)** To use [Electrum light wallets](/docs/user-guides/lightweight-modes) instead of full nodes for Bitcoin and/or Litecoin, add the `--light` flag (enables Electrum for all supported coins) or use per-coin flags like `--btc-mode=electrum` or `--ltc-mode=electrum`.
 
-    7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
-    
+    7. **(Optional)** To use a [remote Monero node](/docs/user-guides/lightweight-modes#monero-remote-nodes) instead of running a local Monero daemon, prefix the command with `XMR_RPC_HOST` and `XMR_RPC_PORT` environment variables (e.g., `XMR_RPC_HOST="node2.monerodevs.org" XMR_RPC_PORT=18089`).
+
+    8. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    9. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
+
     ```bash title="Terminal"
     basicswap-prepare --datadir=$SWAP_DATADIR --withcoins=monero,bitcoin --xmrrestoreheight=$CURRENT_XMR_HEIGHT --usebtcfastsync
     ```
