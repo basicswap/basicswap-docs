@@ -230,7 +230,7 @@ After creating BasicSwap's Docker image, it's time to configure it to your prefe
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+    6. **(Optional)** To password-protect your web UI and API, append `--client-auth-password=<YOUR_PASSWORD>` to the command below. This is recommended if your instance is accessible over a network (e.g., when using `--htmlhost=0.0.0.0`). See the [Web UI Authentication](/docs/user-guides/web-ui-authentication) guide for details on login, API access, password management, and disabling auth.
 
     7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
     
@@ -273,7 +273,7 @@ After creating BasicSwap's Docker image, it's time to configure it to your prefe
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+    6. **(Optional)** To password-protect your web UI and API, append `--client-auth-password=<YOUR_PASSWORD>` to the command below. This is recommended if your instance is accessible over a network (e.g., when using `--htmlhost=0.0.0.0`). See the [Web UI Authentication](/docs/user-guides/web-ui-authentication) guide for details on login, API access, password management, and disabling auth.
 
     7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
     
@@ -446,7 +446,7 @@ Once the installation is complete, configure BasicSwap according to your require
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+    6. **(Optional)** To password-protect your web UI and API, append `--client-auth-password=<YOUR_PASSWORD>` to the command below. This is recommended if your instance is accessible over a network (e.g., when using `--htmlhost=0.0.0.0`). See the [Web UI Authentication](/docs/user-guides/web-ui-authentication) guide for details on login, API access, password management, and disabling auth.
 
     7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
     
@@ -473,7 +473,7 @@ Once the installation is complete, configure BasicSwap according to your require
 
     5. Determine whether you want to use fast synchronization for the Bitcoin blockchain by including the `--usebtcfastsync` parameter. Fast sync uses checkpoints to reduce initial setup time significantly.
 
-    6. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+    6. **(Optional)** To password-protect your web UI and API, append `--client-auth-password=<YOUR_PASSWORD>` to the command below. This is recommended if your instance is accessible over a network (e.g., when using `--htmlhost=0.0.0.0`). See the [Web UI Authentication](/docs/user-guides/web-ui-authentication) guide for details on login, API access, password management, and disabling auth.
 
     7. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
     
