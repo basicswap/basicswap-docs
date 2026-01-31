@@ -170,8 +170,8 @@ BasicSwap's primary function is to help users establish a secure communication c
 <Tabs>
   <TabItem value="bitcoin" label="Bitcoin & Forks" default>
     <ul>
-      <li><strong>Bitcoin (BTC)</strong> - The original cryptocurrency</li>
-      <li><strong>Litecoin (LTC)</strong> - Faster and cheaper Bitcoin alternative with privacy</li>
+      <li><strong>Bitcoin (BTC)</strong> - The original cryptocurrency (supports <a href="/docs/user-guides/lightweight-modes">light wallet mode</a>)</li>
+      <li><strong>Litecoin (LTC)</strong> - Faster and cheaper Bitcoin alternative with privacy (supports <a href="/docs/user-guides/lightweight-modes">light wallet mode</a>)</li>
       <li><strong>Bitcoin Cash (BCC)</strong> - Bitcoin fork focused on payments</li>
       <li><strong>Dogecoin (DOGE)</strong> - Bitcoin with dogs</li>
       <li><strong>Namecoin (NMC)</strong> - Decentralized DNS and public key infrastructure</li>
@@ -179,8 +179,8 @@ BasicSwap's primary function is to help users establish a secure communication c
   </TabItem>
   <TabItem value="privacy" label="Privacy Coins">
     <ul>
-      <li><strong>Monero (XMR)</strong> - Leading privacy-focused cryptocurrency</li>
-      <li><strong>Wownero (WOW)</strong> - Monero fork with experimental features</li>
+      <li><strong>Monero (XMR)</strong> - Leading privacy-focused cryptocurrency (supports <a href="/docs/user-guides/lightweight-modes#monero-remote-nodes">remote node mode</a>)</li>
+      <li><strong>Wownero (WOW)</strong> - Monero fork with experimental features (supports <a href="/docs/user-guides/lightweight-modes#monero-remote-nodes">remote node mode</a>)</li>
       <li><strong>Particl (PART)</strong> - Privacy coin with marketplace features</li>
       <li><strong>Firo (FIRO)</strong> - Privacy coin using zero-knowledge proofs</li>
       <li><strong>PIVX (PIVX)</strong> - Proof-of-stake privacy coin</li>
