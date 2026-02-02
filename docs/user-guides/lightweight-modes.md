@@ -106,13 +106,13 @@ You cannot switch connection modes while the coin has active swaps in progress. 
 
 #### Via Configuration File
 
-You can manually edit the `basicswap_settings.json` file to enable Electrum mode:
+You can manually edit the `basicswap.json` file to enable Electrum mode:
 
 1. Stop BasicSwap.
-2. Open `basicswap_settings.json` in a text editor (located in your data directory).
+2. Open `basicswap.json` in a text editor (located in your data directory).
 3. Under the coin's `chainclients` section, set the following:
 
-```json title="basicswap_settings.json"
+```json title="basicswap.json"
 {
   "chainclients": {
     "bitcoin": {
@@ -131,19 +131,14 @@ You can switch between full node (RPC) and Electrum mode at any time, provided t
 
 #### Automatic Fund Transfer
 
-By default, **auto-transfer on mode switch** is enabled. When you switch modes, BasicSwap will automatically sweep your funds from the old wallet to the new one:
-
-- **RPC → Electrum:** Funds are swept from your full node wallet to Electrum-derived addresses.
-- **Electrum → RPC:** Funds are swept from Electrum addresses back to your full node wallet.
-
-A standard network fee is deducted from the sweep transaction.
+You can enable **auto-transfer on mode switch** in the Settings page. When enabled and you switch from Electrum back to RPC mode, BasicSwap will automatically sweep your funds from Electrum addresses back to your full node wallet. A standard network fee is deducted from the sweep transaction.
 
 #### Manual Fund Transfer
 
-If you disable auto-transfer (`auto_transfer_on_mode_switch: false`), you must manually move your funds between wallets when switching modes.
+If auto-transfer is not enabled, you must manually move your funds between wallets when switching modes.
 
 :::warning
-When auto-transfer is disabled, your old wallet's funds will **not** be accessible from the new mode until you manually transfer them. Make sure to move your funds before or after switching, or enable auto-transfer to have this handled automatically.
+Without auto-transfer, your old wallet's funds will **not** be accessible from the new mode until you manually transfer them. Make sure to move your funds before or after switching, or enable auto-transfer in Settings to have this handled automatically.
 :::
 
 ### Custom Electrum Servers
@@ -187,9 +182,9 @@ Servers are specified in `host:port:ssl` format:
 
 **Via the Web UI:** Navigate to Settings, select the coin, and enter your servers in the clearnet or onion server text fields (one per line).
 
-**Via configuration file:** Add the `electrum_clearnet_servers` and/or `electrum_onion_servers` lists to the coin's section in `basicswap_settings.json`:
+**Via configuration file:** Add the `electrum_clearnet_servers` and/or `electrum_onion_servers` lists to the coin's section in `basicswap.json`:
 
-```json title="basicswap_settings.json"
+```json title="basicswap.json"
 {
   "chainclients": {
     "bitcoin": {
@@ -250,7 +245,7 @@ BasicSwap automatically monitors server health and handles failover:
 | `electrum_clearnet_servers` | list | (built-in defaults) | Custom clearnet servers in `host:port:ssl` format |
 | `electrum_onion_servers` | list | `[]` | Custom `.onion` servers for Tor |
 | `electrum_poll_interval` | int | `10` | Polling interval in seconds for wallet updates |
-| `auto_transfer_on_mode_switch` | bool | `true` | Automatically sweep funds when switching between RPC and Electrum |
+| `auto_transfer_on_mode_switch` | bool | `false` | Automatically sweep funds when switching from Electrum to RPC |
 | `address_gap_limit` | int | `20` | BIP44 gap limit for address derivation and discovery |
 
 ### Electrum Limitations
@@ -458,23 +453,24 @@ ssh -N -R 18089:localhost:18089 user@LOCAL_BSX_IP
 
 ### Trusted vs Untrusted Daemon
 
-BasicSwap automatically determines whether to treat the remote daemon as trusted or untrusted based on the daemon's IP address:
+By default, BasicSwap treats remote daemons as **trusted**. The wallet skips some verification steps for better performance in this mode.
 
-- **Trusted (private IPs):** `127.x.x.x`, `10.x.x.x`, `172.16-31.x.x`, `192.168.x.x`, `localhost`, and `*.local` addresses are treated as trusted. The wallet skips some verification steps for better performance.
+You can opt in to **auto mode**, which determines trust based on the daemon's IP address:
+
+- **Trusted (private IPs):** `127.x.x.x`, `10.x.x.x`, `172.16-31.x.x`, `192.168.x.x`, `localhost`, and `*.local` addresses are treated as trusted.
 - **Untrusted (public IPs):** All other addresses are treated as untrusted. The wallet performs additional verification to guard against a potentially dishonest daemon.
 
-You can override the auto-detection:
+To change the trust mode:
 
-- **During setup:** Add `--trustremotenode` to the `basicswap-prepare` command.
-- **In configuration:** Set `"trusted_daemon": true` or `"trusted_daemon": false` in the Monero section of `basicswap.json`.
+- **In configuration:** Set `"trusted_daemon": "auto"` or `"trusted_daemon": false` in the Monero section of `basicswap.json`.
 
 :::warning
-Only mark a daemon as trusted if you fully control it. A malicious trusted daemon could provide false blockchain data to your wallet.
+Any remote node, even in untrusted mode, can provide bogus data including wildly inflated fees, which can cause permanent loss of funds. Only use nodes that you trust.
 :::
 
 ### Automatic Daemon Selection
 
-BasicSwap can automatically select from a list of remote Monero daemons, providing failover if one becomes unavailable.
+BasicSwap can automatically select from a list of remote Monero daemons, providing failover if one becomes unavailable. Unlike Electrum mode (which switches servers live), Monero daemon selection only happens at startup.
 
 To enable automatic daemon selection:
 
@@ -516,7 +512,7 @@ No additional configuration is needed beyond enabling Tor on your BasicSwap inst
 | `rpcport` | int | `29798` | Remote daemon RPC port (public nodes typically use `18081` or `18089`) |
 | `rpcuser` | string | `""` | Optional RPC authentication username |
 | `rpcpassword` | string | `""` | Optional RPC authentication password |
-| `trusted_daemon` | string | `"auto"` | `true`, `false`, or `"auto"` (auto-detects based on IP) |
+| `trusted_daemon` | bool/string | `true` | `true` (bool), `false` (bool), or `"auto"` (string, auto-detects based on IP) |
 | `automatically_select_daemon` | bool | `false` | Enable automatic daemon selection from URL list |
 | `remote_daemon_urls` | list | `[]` | List of `host:port` strings for daemon failover |
 | `fee_priority` | int | `0` | Transaction fee priority: 0=auto, 1=slow, 2=normal, 3=fast |
