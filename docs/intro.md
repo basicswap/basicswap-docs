@@ -167,6 +167,10 @@ BasicSwap's primary function is to help users establish a secure communication c
   </p>
 </div>
 
+:::tip Coin Compatibility Matrix
+View the complete [Coin Compatibility Matrix](/docs/about/coin-compatibility) to see which coins can be swapped with each other and what swap types (Adaptor Signature, Secret Hash, or VES) are supported for each trading pair.
+:::
+
 <Tabs>
   <TabItem value="bitcoin" label="Bitcoin & Forks" default>
     <ul>
