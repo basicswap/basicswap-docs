@@ -56,12 +56,16 @@ BasicSwap implements two distinct atomic swap protocols: HTLC ('Secret Hash') an
           <h3 style={{textAlign: 'center'}}>PTLC Protocol (Adaptor Sigs)</h3>
         </div>
         <div className="card__body">
-          <p style={{marginBottom: 0}}>Employs adaptor signatures to enable atomic swaps with unscriptable coins like Monero while providing better privacy.</p>   
+          <p style={{marginBottom: 0}}>Employs adaptor signatures to enable atomic swaps with unscriptable coins like Monero while providing better privacy.</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+:::tip Coin Compatibility
+Different coins support different swap protocols based on their technical capabilities. Check the [Coin Compatibility Matrix](/docs/about/coin-compatibility) to see which swap types are available for specific trading pairs.
+:::
 
 ### Technical Implementation
 
