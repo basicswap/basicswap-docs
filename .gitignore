@@ -21,3 +21,4 @@ yarn-error.log*
 
 # Backups
 docusaurus.config copy.js
+_reference/
