@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 title: Take an Offer
 description: "How to take trading offers on BasicSwap DEX"
 ---
