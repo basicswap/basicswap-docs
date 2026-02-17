@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 title: GUI-Based Automated Market Making
 description: "How to use the integrated automated market making (AMM) tool in the BasicSwap DEX GUI."
 ---
