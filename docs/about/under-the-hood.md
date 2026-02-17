@@ -141,7 +141,7 @@ The SMSG network enables BasicSwap to offer functionality beyond what atomic swa
 * Automating complex swap procedures from the user's perspective
 * Facilitating secure communication between independent blockchain networks
 
-In practice, BasicSwap functions as a decentralized alternative to SWIFT—providing a messaging protocol that enables direct peer-to-peer communication for executing atomic swaps using official coin cores (Bitcoin Core, Litecoin Core, etc.).
+In practice, BasicSwap functions as a decentralized alternative to SWIFT in that it provides a messaging protocol that enables direct peer-to-peer communication for executing atomic swaps using official coin cores (Bitcoin Core, Litecoin Core, etc.) or [Electrum light wallets](/docs/user-guides/lightweight-modes) for supported coins (currently Bitcoin and Litecoin), or [remote nodes](/docs/user-guides/lightweight-modes#monero-remote-nodes) for Monero and Wownero.
 
 It's important to understand that BasicSwap itself does not process, initiate, or execute the actual swaps. Its role is strictly limited to enabling secure communication between trading parties and simplifying the complex process of performing atomic swaps across different blockchains.
 
