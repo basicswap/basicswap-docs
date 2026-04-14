@@ -10,7 +10,7 @@ import React from 'react';
 
 # Lightweight Modes
 
-BasicSwap supports lightweight alternatives to running full blockchain nodes for select coins. Instead of downloading and syncing entire blockchains, you can use **Electrum light wallets** for Bitcoin and Litecoin, or connect to a **remote Monero node** for Monero and Wownero. These modes let you start trading much faster with significantly lower disk and bandwidth requirements.
+BasicSwap supports lightweight alternatives to running full blockchain nodes for select coins. Instead of downloading and syncing entire blockchains, you can use **Electrum light wallets** for Bitcoin and Litecoin, or connect to a **remote Monero node** for Monero and Wownero. These modes reduce disk and bandwidth requirements at the cost of trusting a third-party server for blockchain data. Running a full node remains the most trustless and private option.
 
 :::info
 Lightweight modes are currently available for **Bitcoin**, **Litecoin** (via Electrum), and **Monero**, **Wownero** (via remote nodes). All other coins still require full nodes.
@@ -96,9 +96,9 @@ You can switch an existing coin to Electrum mode through the BasicSwap Settings 
 2. Locate the coin you want to switch (Bitcoin or Litecoin).
 3. Change the **Connection Type** dropdown from `rpc` to `electrum`.
 4. (Optional) Configure custom Electrum servers in the server list fields.
-5. (Optional) Toggle **Auto-transfer on mode switch** (enabled by default).
-6. (Optional) Adjust the **Address Gap Limit** (default: 20).
-7. Click **Apply** to save changes.
+5. (Optional) Adjust the **Address Gap Limit** (default: 50).
+6. Click **Apply** to save changes.
+7. A migration modal will appear. Confirm the switch and, if the source wallet holds a balance, choose whether to transfer those funds during this switch or leave them on their current addresses.
 
 :::warning
 You cannot switch connection modes while the coin has active swaps in progress. Complete or cancel all pending swaps before switching.
@@ -127,18 +127,35 @@ You can manually edit the `basicswap.json` file to enable Electrum mode:
 
 ### Switching Between Modes
 
-You can switch between full node (RPC) and Electrum mode at any time, provided there are no active swaps for that coin.
+You can switch between full node (RPC) and Electrum mode at any time, provided there are no active swaps for that coin. There is no persistent "auto-transfer" setting; each switch triggers a one-off migration modal whose contents depend on the direction of the switch.
 
-#### Automatic Fund Transfer
+**Both modes derive from the same seed.** Standard BIP84 (native segwit) funds derived from that seed are visible in both RPC and Electrum mode, so switching connection type does not normally require moving funds. Transfer only comes into play when funds sit on addresses that the destination mode cannot derive.
 
-You can enable **auto-transfer on mode switch** in the Settings page. When enabled and you switch from Electrum back to RPC mode, BasicSwap will automatically sweep your funds from Electrum addresses back to your full node wallet. A standard network fee is deducted from the sweep transaction.
+:::tip
+You don't have to use the BasicSwap migration flow. If you'd rather handle it yourself, send the funds out to another wallet you own (external Electrum, a hardware wallet, another BasicSwap instance, anything you trust) before you start the switch. Once the source wallet is empty there's nothing left for the migration to move, and you can bring the funds back later or leave them where they are.
+:::
 
-#### Manual Fund Transfer
+#### Switching RPC → Electrum
 
-If auto-transfer is not enabled, you must manually move your funds between wallets when switching modes.
+When you apply the switch in Settings, a modal appears that:
+
+1. Shows the coin's **extended private key** (e.g. `zprv...` / `yprv...`) for backup into an external Electrum wallet, with import instructions. You must tick *"I have written down this key"* before confirming the switch.
+2. Scans the RPC wallet for funds on **non-derivable (non-BIP84) addresses**. These are legacy or imported addresses that the BIP84 derivation path cannot reach from the seed, so an external Electrum wallet restored from the extended key would not see them.
+3. If such funds exist and exceed the estimated sweep fee, BasicSwap **automatically consolidates them to a BIP84 address** as part of the switch. There is no opt-out in this direction. If the balance on non-derivable addresses is below the fee threshold, the modal notes this and no transfer is attempted.
+
+Funds already on BIP84 addresses are left in place. They remain visible and spendable from the Electrum lite wallet without being moved.
+
+#### Switching Electrum → RPC
+
+When you apply the switch in Settings, a modal appears that:
+
+1. Checks the lite wallet balance and the estimated sweep fee. The transfer option is only offered when the balance exceeds roughly twice the estimated fee; otherwise the modal shows *"Balance is too low to transfer - fee would exceed funds"* and no sweep is possible.
+2. If a transfer is possible, shows two radio options:
+   - **Auto-transfer funds to RPC wallet** (selected by default). BasicSwap sweeps the lite wallet balance to the full-node wallet during the switch. A standard network fee is deducted.
+   - **Keep funds on current addresses.** No sweep is performed. BasicSwap still syncs the RPC wallet's keypool to match the lite wallet's derived addresses and triggers a rescan, so funds on those addresses remain discoverable by the full node after the switch.
 
 :::warning
-Without auto-transfer, your old wallet's funds will **not** be accessible from the new mode until you manually transfer them. Make sure to move your funds before or after switching, or enable auto-transfer in Settings to have this handled automatically.
+Each switch is an explicit, one-off decision; the choice is not remembered for future switches.
 :::
 
 ### Custom Electrum Servers
@@ -204,13 +221,13 @@ Servers are specified in `host:port:ssl` format:
 
 ### Tor Integration
 
-Electrum mode fully supports Tor for enhanced privacy.
+Electrum mode supports Tor for enhanced privacy. BasicSwap does not ship with any built-in `.onion` Electrum servers. If you want to use onion servers, you must add them yourself in the Settings UI or in `basicswap.json`.
 
 When Tor is enabled on your BasicSwap instance:
 
-1. **Onion servers are prioritized:** if you have `.onion` Electrum servers configured, they will be used first.
-2. **Clearnet servers are routed through Tor:** if no onion servers are available, clearnet servers are accessed through a SOCKS5 Tor proxy.
-3. **SSL is automatically disabled over Tor:** Tor already provides end-to-end encryption, so the additional SSL layer is unnecessary.
+1. **Onion servers are prioritised:** any user-supplied `.onion` servers are placed ahead of clearnet servers in the connection order.
+2. **Clearnet servers are routed through a SOCKS5 Tor proxy:** clearnet servers remain in the list and are reached through Tor.
+3. **SSL behaviour is per-server:** the `ssl` flag is taken from each server entry as-is and is not changed by Tor. Clearnet Electrum servers typically use SSL; onion servers are usually configured with `ssl: false` since Tor already provides end-to-end encryption.
 
 No additional configuration is needed beyond enabling Tor on your BasicSwap instance and optionally adding `.onion` servers to your Electrum server list.
 
@@ -245,8 +262,7 @@ BasicSwap automatically monitors server health and handles failover:
 | `electrum_clearnet_servers` | list | (built-in defaults) | Custom clearnet servers in `host:port:ssl` format |
 | `electrum_onion_servers` | list | `[]` | Custom `.onion` servers for Tor |
 | `electrum_poll_interval` | int | `10` | Polling interval in seconds for wallet updates |
-| `auto_transfer_on_mode_switch` | bool | `false` | Automatically sweep funds when switching from Electrum to RPC |
-| `address_gap_limit` | int | `20` | BIP44 gap limit for address derivation and discovery |
+| `address_gap_limit` | int | `50` | BIP44 gap limit for address derivation and discovery (clamped between 5 and 100) |
 
 ### Electrum Limitations
 
@@ -509,7 +525,7 @@ No additional configuration is needed beyond enabling Tor on your BasicSwap inst
 | `manage_daemon` | bool | `true` | Set to `false` for remote node mode |
 | `manage_wallet_daemon` | bool | `true` | Wallet always runs locally; leave as `true` |
 | `rpchost` | string | `"127.0.0.1"` | Remote daemon IP or hostname |
-| `rpcport` | int | `29798` | Remote daemon RPC port (public nodes typically use `18081` or `18089`) |
+| `rpcport` | int | `29798` | Remote daemon RPC port. `29798` is BasicSwap's own default, chosen to avoid colliding with a host-system `monerod`. When connecting to a public remote node, override this. Public Monero nodes conventionally expose `18081` (unrestricted) or `18089` (restricted) |
 | `rpcuser` | string | `""` | Optional RPC authentication username |
 | `rpcpassword` | string | `""` | Optional RPC authentication password |
 | `trusted_daemon` | bool/string | `true` | `true` (bool), `false` (bool), or `"auto"` (string, auto-detects based on IP) |
