@@ -65,8 +65,7 @@ const config = {
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
-      // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/images/basicswap_header.jpg',
       navbar: {
         title: 'Home',
         logo: {
