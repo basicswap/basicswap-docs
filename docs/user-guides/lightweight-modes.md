@@ -132,7 +132,7 @@ You can switch between full node (RPC) and Electrum mode at any time, provided t
 **Both modes derive from the same seed.** Standard BIP84 (native segwit) funds derived from that seed are visible in both RPC and Electrum mode, so switching connection type does not normally require moving funds. Transfer only comes into play when funds sit on addresses that the destination mode cannot derive.
 
 :::tip
-You don't have to use the BasicSwap migration flow. If you'd rather handle it yourself, send the funds out to another wallet you own (external Electrum, a hardware wallet, another BasicSwap instance, anything you trust) before you start the switch. Once the source wallet is empty there's nothing left for the migration to move, and you can bring the funds back later or leave them where they are.
+You don't have to use the BasicSwap migration flow. If you'd rather handle it yourself, send the funds out to another wallet you own (external Electrum, a hardware wallet, another BasicSwap instance, anything you trust) before you start the switch. Once the source wallet is empty, the migration has nothing to move. You can bring the funds back later or leave them where they are.
 :::
 
 #### Switching RPC → Electrum
