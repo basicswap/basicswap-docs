@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: Make an Offer
 description: "How to make and manage trading offers on BasicSwap DEX"
 ---
