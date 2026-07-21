@@ -14,6 +14,12 @@ BasicSwap DEX is under active open-source development, with frequent releases in
 
 This guide provides step-by-step instructions for properly updating your BasicSwap instance to the latest version.
 
+:::warning Updating to v0.17.5
+This release updates the Bitcoin, Dash and Monero coin cores, so run the **Update Coin Core Versions** step below after updating BasicSwap. The database schema is unchanged, so no migration runs.
+
+If you are updating from a version before v0.17.3 and reach the web UI over a network (a LAN IP, hostname, or reverse proxy), you must add the new `allowed_hosts` setting by hand. Updating does not add it to an existing `basicswap.json`, so the UI will return `403 Host not allowed` until you do. Purely local and default Docker (published to localhost) installs are unaffected. See [Reaching BasicSwap Over a Network](/docs/user-guides/web-ui-authentication#reaching-basicswap-over-a-network).
+:::
+
 ## Update a Docker Image
 
 If you've built BasicSwap using the Docker method, follow these steps to update your instance to the most up-to-date version.
@@ -74,10 +80,10 @@ If you've built BasicSwap using the Docker method, follow these steps to update 
     docker-compose stop
     ```
 
-    4. Apply coin core updates to your docker image. Make sure to write what coin core(s) you want to update using the `--withcoins` argument.
+    4. Apply coin core updates to your Docker image. `--upgradecores` updates every coin core already enabled in your configuration, so no `--withcoins` argument is needed.
     
     ```bash title="Terminal" showLineNumbers
-    docker-compose run --rm swapclient \ 
+    docker-compose run --rm swapclient \
     basicswap-prepare --datadir=/coindata --upgradecores
     ```
   </TabItem>
@@ -135,7 +141,7 @@ Linux users can simplify the update process with community-maintained automation
     
     2. Update your BasicSwap instance to the latest version.
 
-    3. Apply coin core updates to your BasicSwap instance. Make sure to input what coin core(s) you want to update using the `--withcoins` argument.
+    3. Apply coin core updates to your BasicSwap instance. `--upgradecores` updates every coin core already enabled in your configuration, so no `--withcoins` argument is needed.
     
     ```bash title="Terminal"
     basicswap-prepare --datadir=$SWAP_DATADIR --upgradecores

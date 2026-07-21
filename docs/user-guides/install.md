@@ -236,6 +236,10 @@ After creating BasicSwap's Docker image, it's time to configure it to your prefe
 
     8. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
 
+    :::note
+    The command below binds the web UI to `0.0.0.0`. The default Docker setup publishes the port to `localhost`, so browsing at `http://localhost:12700` works with no extra configuration. If you will reach the UI from another machine by a LAN IP, hostname, or reverse proxy, you must also add an `allowed_hosts` entry after setup, or it will return `403 Host not allowed`. See [Reaching BasicSwap Over a Network](/docs/user-guides/web-ui-authentication#reaching-basicswap-over-a-network).
+    :::
+
     9. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
 
     ```bash title="Terminal"
@@ -282,6 +286,10 @@ After creating BasicSwap's Docker image, it's time to configure it to your prefe
     7. **(Optional)** To use a [remote Monero node](/docs/user-guides/lightweight-modes#monero-remote-nodes) instead of running a local Monero daemon, prefix the command with `XMR_RPC_HOST` and `XMR_RPC_PORT` environment variables (e.g., `-e XMR_RPC_HOST="node2.monerodevs.org" -e XMR_RPC_PORT=18089`).
 
     8. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    :::note
+    The command below binds the web UI to `0.0.0.0`. The default Docker setup publishes the port to `localhost`, so browsing at `http://localhost:12700` works with no extra configuration. If you will reach the UI from another machine by a LAN IP, hostname, or reverse proxy, you must also add an `allowed_hosts` entry after setup, or it will return `403 Host not allowed`. See [Reaching BasicSwap Over a Network](/docs/user-guides/web-ui-authentication#reaching-basicswap-over-a-network).
+    :::
 
     9. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
 
@@ -460,6 +468,10 @@ Once the installation is complete, configure BasicSwap according to your require
 
     8. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
 
+    :::note
+    The command below binds the web UI to `0.0.0.0`. The default Docker setup publishes the port to `localhost`, so browsing at `http://localhost:12700` works with no extra configuration. If you will reach the UI from another machine by a LAN IP, hostname, or reverse proxy, you must also add an `allowed_hosts` entry after setup, or it will return `403 Host not allowed`. See [Reaching BasicSwap Over a Network](/docs/user-guides/web-ui-authentication#reaching-basicswap-over-a-network).
+    :::
+
     9. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
 
     ```bash title="Terminal"
@@ -490,6 +502,10 @@ Once the installation is complete, configure BasicSwap according to your require
     7. **(Optional)** To use a [remote Monero node](/docs/user-guides/lightweight-modes#monero-remote-nodes) instead of running a local Monero daemon, prefix the command with `XMR_RPC_HOST` and `XMR_RPC_PORT` environment variables (e.g., `XMR_RPC_HOST="node2.monerodevs.org" XMR_RPC_PORT=18089`).
 
     8. Append `--client-auth-password=<YOUR_PASSWORD>` to the below command to optionally enable client authentication to protect your web UI and API port access from unauthorized access.
+
+    :::note
+    The command below binds the web UI to `0.0.0.0`. The default Docker setup publishes the port to `localhost`, so browsing at `http://localhost:12700` works with no extra configuration. If you will reach the UI from another machine by a LAN IP, hostname, or reverse proxy, you must also add an `allowed_hosts` entry after setup, or it will return `403 Host not allowed`. See [Reaching BasicSwap Over a Network](/docs/user-guides/web-ui-authentication#reaching-basicswap-over-a-network).
+    :::
 
     9. Execute the following command to configure your BasicSwap, adjusting it according to your preferences as described above.
 

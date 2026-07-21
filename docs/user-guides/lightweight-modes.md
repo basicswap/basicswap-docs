@@ -44,6 +44,10 @@ Only the following coins currently support Electrum mode:
 - **Bitcoin (BTC)**
 - **Litecoin (LTC)**
 
+:::note
+Litecoin over Electrum requires BasicSwap v0.17.5 or newer. Earlier releases could not verify Litecoin confirmations in Electrum mode.
+:::
+
 ### Enable Electrum Mode
 
 There are multiple ways to enable Electrum light wallet mode, depending on whether you are setting up BasicSwap for the first time or modifying an existing installation.
@@ -87,6 +91,10 @@ basicswap-prepare --datadir=$SWAP_DATADIR --withcoins=bitcoin --btc-mode=electru
 ```
 
 The server format is `host:port[:ssl]`, where `ssl` is `true` (default) or `false`.
+
+:::warning Reaching the UI over your LAN
+These examples set `--htmlhost="0.0.0.0"` so BasicSwap listens on all interfaces, which is common for a light-wallet box you reach from another machine. Since v0.17.3, browsing to a LAN address (for example `http://192.168.1.50:12700`) returns `403 Host not allowed` unless that address is listed in `allowed_hosts`, and the live-updates WebSocket is blocked too. A bind-all address like `0.0.0.0` is never accepted as a hostname. Browsing on the same machine at `localhost` needs no change. See [Reaching BasicSwap Over a Network](/docs/user-guides/web-ui-authentication#reaching-basicswap-over-a-network).
+:::
 
 #### Via the Web UI
 
@@ -225,11 +233,11 @@ Electrum mode supports Tor for enhanced privacy. BasicSwap does not ship with an
 
 When Tor is enabled on your BasicSwap instance:
 
-1. **Onion servers are prioritised:** any user-supplied `.onion` servers are placed ahead of clearnet servers in the connection order.
-2. **Clearnet servers are routed through a SOCKS5 Tor proxy:** clearnet servers remain in the list and are reached through Tor.
+1. **If you configure any `.onion` servers, only those are used.** Your clearnet servers are dropped from the connection list, with no automatic failover to clearnet over Tor. List every server you want reachable as an `.onion` entry.
+2. **If you configure no `.onion` servers,** your clearnet servers (or the built-in defaults) are used, routed through a SOCKS5 Tor proxy.
 3. **SSL behaviour is per-server:** the `ssl` flag is taken from each server entry as-is and is not changed by Tor. Clearnet Electrum servers typically use SSL; onion servers are usually configured with `ssl: false` since Tor already provides end-to-end encryption.
 
-No additional configuration is needed beyond enabling Tor on your BasicSwap instance and optionally adding `.onion` servers to your Electrum server list.
+Because of the first point, do not rely on clearnet entries as a Tor fallback. If you list any `.onion` server, your clearnet entries are ignored while Tor is enabled.
 
 ### Monitoring Electrum Wallets
 
