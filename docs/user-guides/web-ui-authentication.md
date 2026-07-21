@@ -23,7 +23,7 @@ Since v0.17.3, a password alone is not enough to reach the UI over a network. Ba
 
 ## Reaching BasicSwap Over a Network
 
-Since v0.17.3, BasicSwap checks the `Host` header of every request, and the `Origin` of every state-changing request, against an allowlist. This is a defence against DNS-rebinding and cross-site attacks. `localhost`, `127.0.0.1` and `::1` on the configured html port are always allowed, so a purely local install and the default Docker setup (which publishes the port to localhost) need no configuration.
+Since v0.17.3, BasicSwap checks the `Host` header of every request, and the `Origin` of every state-changing request, against an allowlist. This is a defence against DNS-rebinding and cross-site attacks. `localhost`, `127.0.0.1` and `::1` are always allowed, so a purely local install and the default Docker setup (which publishes the port to localhost) need no configuration.
 
 To reach the UI by anything else, add that host to `allowed_hosts` in `basicswap.json` and restart:
 
@@ -145,16 +145,7 @@ The response includes a `basicswap_session_id` cookie that you can reuse for sub
 
 ## Change Password
 
-There are two ways to change the authentication password.
-
-**Via the web UI:** Navigate to `/changepassword` while logged in. Enter your current password and a new one. The new password must meet these requirements:
-
-* At least 8 characters
-* At least one uppercase letter (A-Z)
-* At least one lowercase letter (a-z)
-* At least one number (0-9)
-
-**Via the command line:** Stop BasicSwap and re-run `basicswap-prepare` with the new password:
+The web UI authentication password can only be changed from the command line. Stop BasicSwap and re-run `basicswap-prepare` with the new password:
 
 <Tabs groupId="auth-change-pw">
   <TabItem value="docker" label="Docker" default>
@@ -173,6 +164,12 @@ There are two ways to change the authentication password.
     ```
   </TabItem>
 </Tabs>
+
+This replaces the stored `client_auth_hash` with a hash of the new password. Because BasicSwap must be restarted for the change to take effect, all active sessions are invalidated and everyone must log in again.
+
+:::note
+The `/changepassword` page inside the web UI is a **separate** feature: it changes the encryption password on your coin wallets, not the login password. It has no effect on web UI authentication.
+:::
 
 ## Disable Authentication
 
