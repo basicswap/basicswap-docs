@@ -47,7 +47,7 @@ If your coin fails some requirements, integration remains possible but may requi
 4. Execute the requirements test script with the command below, replacing the path with the correct location of your cryptocurrency's daemon executable.
 
    ```bash title="Terminal"
-   py requirements.python ~/Applications/particl/bin/particld -d
+   python requirements.py ~/Applications/particl/bin/particld -d
    ```
 
 ### Integration Process
