@@ -9,6 +9,10 @@ import TabItem from '@theme/TabItem';
 
 # Web UI Authentication
 
+The web interface of BasicSwap can be accessed by opening your web browser and navigating to the address below:
+```
+http://localhost:12700
+```
 BasicSwap can require a password to access the web interface and API. This protects your instance from unauthorized access, which is particularly important if your BasicSwap is reachable over a network (for example, when running with `--htmlhost=0.0.0.0`).
 
 When authentication is enabled, every page except the login screen requires a valid session or API credentials. Without them, visitors are redirected to the login page.
